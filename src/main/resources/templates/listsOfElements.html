@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lists of elements</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#authors">Authors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#books">Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#covers">Covers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#editions">Editions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#publishYears">Publish years</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout" >Log out</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div align="center">
+    <h1>Authors</h1>
+    <div id="authors" class="d-flex flex-row">
+        <div class="col-md-12">
+            <button><a href="/listsOfElements/authors">List of all</a> </button>
+            <div th:each="el: ${authors}">
+                <span th:text="${el.firstName}"></span>
+                <span th:text="${el.lastName}"></span>
+                <span th:text="${el.patronymic}"></span>
+            </div>
+        </div>
+
+    </div>
+    <h2>Books</h2>
+    <div id="books" class="d-flex flex-row">
+        <div class="col-md-12">
+            <button><a href="/listsOfElements/books">List of all</a> </button>
+            <div th:each="bookMap:${books}">
+                <div th:each="book:${bookMap.entrySet()}">
+                    <span th:text="${book.getKey()}"></span>
+                    <span th:text="${book.getValue()}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2>Covers</h2>
+    <div id="covers" class="d-flex flex-row">
+        <div class="col-md-12">
+            <button><a href="/listsOfElements/covers">List of all</a> </button>
+            <div th:each="el: ${covers}">
+                <span th:text="${el.getName()}"></span>
+            </div>
+        </div>
+    </div>
+    <h2>Editions</h2>
+    <div id="editions" class="d-flex flex-row">
+        <div class="col-md-12">
+            <button><a href="/listsOfElements/editions">List of all</a> </button>
+            <div th:each="el: ${editions}">
+                <span th:text="${el.getValue()}"></span>
+            </div>
+        </div>
+    </div>
+    <h2>Publish years</h2>
+    <div id="publishYears" class="d-flex flex-row">
+        <div class="col-md-12">
+            <button><a href="/listsOfElements/publishYears">List of all</a> </button>
+            <div th:each="el: ${publishYears}">
+                <span th:text="${el.getYear()}"></span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

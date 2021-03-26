@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#authors">Authors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#books">Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#covers">Covers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#editions">Editions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#publishYears">Publish years</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/modifyRemoveElements">Modify or delete elements</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout" >Log out</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div align="center">
+    <h1>Authors</h1>
+    <div id="authors" class="d-flex flex-row">
+        <div class="col-md-4">
+            <button><a href="/addElements/authors">List of all</a> </button>
+            <div th:each="el: ${authors}">
+                <span th:text="${el.firstName}"></span>
+                <span th:text="${el.lastName}"></span>
+                <span th:text="${el.patronymic}"></span>
+            </div>
+        </div>
+        <form action="/addElements/addAuthor" method="post" class="col-md-4" name="myForm">
+            <label for="FormInput1" class="form-label">Name</label>
+            <input type="text" class="form-control" id="FormInput1" placeholder="Name" name="firstName">
+            <label for="FormInput2" class="form-label">Surname</label>
+            <input type="text" class="form-control" id="FormInput2" placeholder="Surname" name="lastName">
+            <label for="FormInput3" class="form-label">Patronymic</label>
+            <input type="text" class="form-control" id="FormInput3" placeholder="Patronymic" name="patronymic">
+            <label><input type="radio" name="lang" value="eng" required>eng</label>
+            <label><input type="radio" name="lang" value="rus">rus</label>
+            <label><input type="radio" name="lang" value="ukr">ukr</label>
+            <br><input type="submit" value="Add">
+            <br><b th:text="${addAuthorResult}"></b>
+        </form>
+
+    </div>
+    <h2>Books</h2>
+    <div id="books" class="d-flex flex-row">
+        <div class="col-md-4">
+            <button><a href="/addElements/books" modelAttribute="employee">List of all</a> </button>
+            <div th:each="bookMap:${books}">
+                <div th:each="book:${bookMap.entrySet()}">
+                    <span th:text="${book.getKey()}"></span>
+                    <span th:text="${book.getValue()}"></span>
+                </div>
+            </div>
+        </div>
+        <form action="/addElements/addBook" method="post" class="col-md-4" >
+            <label for="FormInput4" class="form-label">Author's name</label>
+            <input type="text" class="form-control" id="FormInput4" placeholder="Author's name" name="firstName">
+            <label for="FormInput5" class="form-label">Author's surname</label>
+            <input type="text" class="form-control" id="FormInput5" placeholder="Author's surname" name="lastName">
+            <label for="FormInput6" class="form-label">Author's patronymic</label>
+            <input type="text" class="form-control" id="FormInput6" placeholder="Author's patronymic" name="patronymic">
+            <label for="FormInput7" class="form-label">Name</label>
+            <input type="text" class="form-control" id="FormInput7" placeholder="Name" name="name">
+            <label for="FormInput8" class="form-label">Publish year</label>
+            <input type="number" class="form-control" id="FormInput8" placeholder="Publish year" name="publishYear">
+            <label for="FormInput9" class="form-label">Number of editions</label>
+            <input type="number" class="form-control" id="FormInput9" placeholder="Number of editions" name="edition">
+            <label for="FormInput10" class="form-label">Cover</label>
+            <input type="text" class="form-control" id="FormInput10" placeholder="Cover" name="cover">
+            <label for="FormInput11" class="form-label">ISBN</label>
+            <input type="text" class="form-control" id="FormInput11" placeholder="isbn" name="isbn">
+            <label><input type="radio" name="lang" value="eng" required>eng</label>
+            <label><input type="radio" name="lang" value="rus">rus</label>
+            <label><input type="radio" name="lang" value="ukr">ukr</label>
+            <br><input type="submit" value="Add">
+            <br><b th:text="${addBookResult}"></b>
+
+        </form>
+    </div>
+    <h2>Covers</h2>
+    <div id="covers" class="d-flex flex-row">
+        <div class="col-md-4">
+            <button><a href="/addElements/covers">List of all</a> </button>
+            <div th:each="el: ${covers}">
+                <span th:text="${el.getName()}"></span>
+            </div>
+        </div>
+        <form method="post" class="col-md-4" >
+            <label for="FormInput12" class="form-label">Cover's name</label>
+            <input type="text" class="form-control" id="FormInput12" placeholder="Cover's name" name="cover">
+            <label><input type="radio" name="lang" value="eng" required>eng</label>
+            <label><input type="radio" name="lang" value="rus">rus</label>
+            <label><input type="radio" name="lang" value="ukr">ukr</label>
+            <br><input type="submit" value="Add">
+            <br><b th:text="${addCoverResult}"></b>
+
+        </form>
+    </div>
+    <h2>Editions</h2>
+    <div id="editions" class="d-flex flex-row">
+        <div class="col-md-4">
+            <button><a href="/addElements/editions">List of all</a> </button>
+            <div th:each="el: ${editions}">
+                <span th:text="${el.getValue()}"></span>
+            </div>
+        </div>
+        <form action="/addElements/addEdition" method="post" class="col-md-4">
+            <label for="FormInput13" class="form-label">Number of editions</label>
+            <input type="number" class="form-control" id="FormInput13" placeholder="Number of editions" name="edition">
+            <label><input type="radio" name="lang" value="eng" required>eng</label>
+            <label><input type="radio" name="lang" value="rus">rus</label>
+            <label><input type="radio" name="lang" value="ukr">ukr</label>
+            <br><input type="submit" value="Add">
+            <br><b th:text="${addEditionResult}"></b>
+
+        </form>
+    </div>
+    <h2>Publish years</h2>
+    <div id="publishYears" class="d-flex flex-row">
+        <div class="col-md-4">
+            <button><a href="/addElements/publishYears">List of all</a> </button>
+            <div th:each="el: ${publishYears}">
+                <span th:text="${el.getYear()}"></span>
+            </div>
+        </div>
+        <form action="/addElements/addPublishYear" method="post" class="col-md-4">
+            <label for="FormInput14" class="form-label">Year</label>
+            <input type="text" class="form-control" id="FormInput14" placeholder="Year" name="publishYear">
+            <label><input type="radio" name="lang" value="eng" required>eng</label>
+            <label><input type="radio" name="lang" value="rus">rus</label>
+            <label><input type="radio" name="lang" value="ukr">ukr</label>
+            <br><input type="submit" value="Add">
+            <br><b th:text="${addYearResult}"></b>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>
