@@ -9,7 +9,7 @@ import javax.persistence.Column;
 @Entity(name = "Books")
 public class Book {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column(name = "name")
     private String name;
@@ -22,7 +22,7 @@ public class Book {
     @Column(name = "isbn")
     private String isbn;
 
-    public Book(String name,  int publishYear, int edition, int cover, String isbn) {
+    public Book(String name, int publishYear, int edition, int cover, String isbn) {
         this.name = name;
         this.publishYear = publishYear;
         this.edition = edition;

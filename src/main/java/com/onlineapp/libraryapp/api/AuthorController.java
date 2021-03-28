@@ -1,8 +1,10 @@
 package com.onlineapp.libraryapp.api;
 
+import com.onlineapp.libraryapp.model.request.AddAuthorRequest;
+import com.onlineapp.libraryapp.model.request.RemoveAuthorRequest;
+import com.onlineapp.libraryapp.model.request.UpdateAuthorRequest;
 import com.onlineapp.libraryapp.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,41 +22,38 @@ public class AuthorController {
     }
 
     @GetMapping("/addElements/authors")
-    public String authors(Model model) {
+    public String authorsInAddElements(Model model) {
         model.addAttribute("authors", authorService.authors());
         return "addElements";
     }
 
     @GetMapping("/modifyRemoveElements/authors")
-    public String authors2(Model model) {
+    public String authorsInModifyRemoveElements(Model model) {
         model.addAttribute("authors", authorService.authors());
         return "modifyRemoveElements";
     }
+
     @GetMapping("/listsOfElements/authors")
-    public String authors3(Model model) {
+    public String authorsInListsOfElements(Model model) {
         model.addAttribute("authors", authorService.authors());
         return "listsOfElements";
     }
 
     @PostMapping("/addElements/addAuthor")
-    public String addAuthor(Model model, @RequestParam String firstName, @RequestParam String lastName,
-                            @RequestParam String patronymic, @RequestParam String lang){
-        model.addAttribute("addAuthorResult", authorService.addAuthor(firstName, lastName, patronymic, lang));
-        System.out.println(lang);
+    public String addAuthor(Model model, AddAuthorRequest authorRequest) {
+        model.addAttribute("addAuthorResult", authorService.addAuthor(authorRequest));
         return "addElements";
     }
 
     @PostMapping("/modifyRemoveElements/removeAuthor")
-    public String removeAuthor(Model model, @RequestParam String firstName, @RequestParam String lastName,
-                               @RequestParam String patronymic, @RequestParam String lang){
-        model.addAttribute("removeAuthorResult", authorService.removeAuthor(firstName, lastName, patronymic, lang));
+    public String removeAuthor(Model model, RemoveAuthorRequest removeAuthorRequest) {
+        model.addAttribute("removeAuthorResult", authorService.removeAuthor(removeAuthorRequest));
         return "modifyRemoveElements";
     }
 
     @PostMapping("/modifyRemoveElements/updateAuthor")
-    public String updateAuthor(Model model, @Param("oldFirstName") String oldFirstName, @Param("oldLastName") String oldLastName, @Param("oldPatronymic") String oldPatronymic,
-                               @Param("newFirstName") String newLastName, @Param("newLastName") String newFirstName, @Param("newPatronymic") String newPatronymic, @RequestParam String lang){
-        model.addAttribute("updateAuthorResult", authorService.updateAuthor(oldFirstName, oldLastName, oldPatronymic, newLastName, newFirstName, newPatronymic, lang));
+    public String updateAuthor(Model model, UpdateAuthorRequest updateAuthorRequest) {
+        model.addAttribute("updateAuthorResult", authorService.updateAuthor(updateAuthorRequest));
         return "modifyRemoveElements";
     }
 

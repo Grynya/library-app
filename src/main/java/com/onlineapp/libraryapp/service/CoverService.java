@@ -28,34 +28,34 @@ public class CoverService {
         return coverRepository.findAll();
     }
 
-    public String addCover(String cover, String lang){
+    public String addCover(String cover, String lang) {
         try {
-            coverRepository.save(new Cover(cover.replaceAll("\\s+","")));
+            coverRepository.save(new Cover(cover.replaceAll("\\s+", "")));
             return resultConfig.result().getAddElementResultSuccessAdded().get(lang);
-        }
-        catch (DataIntegrityViolationException | ConstraintViolationException exception){
+        } catch (DataIntegrityViolationException | ConstraintViolationException exception) {
             return resultConfig.result().getAddElementResultNotAdded().get(lang);
 
         }
-
     }
+
     @Autowired
     BookRepository bookRepository;
+
     public String removeCover(String cover, String lang) {
-            for (Book b :bookRepository.findAll()){
-                if (b.getCover()== coverRepository.getIdCoverByName(cover)){
-                    return resultConfig.result().getHasReferences().get(lang);
-                }
+        for (Book b : bookRepository.findAll()) {
+            if (b.getCover() == coverRepository.getIdCoverByName(cover)) {
+                return resultConfig.result().getHasReferences().get(lang);
             }
-            if (coverRepository.findById(coverRepository.getIdCoverByName(cover)).isPresent()) {
-                coverRepository.deleteById(coverRepository.getIdCoverByName(cover));
-                return resultConfig.result().getRemoveElementResultSuccessRemoved().get(lang);
-            }
-            return resultConfig.result().getRemoveElementResultNotRemoved().get(lang);
+        }
+        if (coverRepository.findById(coverRepository.getIdCoverByName(cover)).isPresent()) {
+            coverRepository.deleteById(coverRepository.getIdCoverByName(cover));
+            return resultConfig.result().getRemoveElementResultSuccessRemoved().get(lang);
+        }
+        return resultConfig.result().getRemoveElementResultNotRemoved().get(lang);
     }
 
     public String updateCover(String oldName, String newName, String lang) {
-        if (coverRepository.findById(coverRepository.getIdCoverByName(oldName)).isPresent()){
+        if (coverRepository.findById(coverRepository.getIdCoverByName(oldName)).isPresent()) {
             Cover cover = coverRepository.findById(coverRepository.getIdCoverByName(oldName)).get();
             cover.setName(newName);
             coverRepository.save(cover);
@@ -65,4 +65,3 @@ public class CoverService {
     }
 
 }
-

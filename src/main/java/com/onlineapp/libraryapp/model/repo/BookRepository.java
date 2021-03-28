@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BookRepository extends CrudRepository<Book, Integer>{
+public interface BookRepository extends CrudRepository<Book, Integer> {
 
-    @Query(value="SELECT * from books WHERE books.name=:name or books.isbn=:isbn",nativeQuery=true)
+    @Query(value = "SELECT * from books WHERE books.name=:name or books.isbn=:isbn", nativeQuery = true)
     List<String> checkForDuplicate(@Param("name") String name, @Param("isbn") String isbn);
 
     default int getIdBookByNameAndIsbn(String name, String isbn) {
@@ -23,4 +23,3 @@ public interface BookRepository extends CrudRepository<Book, Integer>{
         return -1;
     }
 }
-

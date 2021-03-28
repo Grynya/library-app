@@ -30,24 +30,25 @@ public class EditionService {
         return editionRepository.findAll();
     }
 
-    public String  addEdition(String edition, String lang){
+    public String addEdition(String edition, String lang) {
         try {
-            editionRepository.save(new Edition(Integer.parseInt(edition.replaceAll("\\s+",""))));
+            editionRepository.save(new Edition(Integer.parseInt(edition.replaceAll("\\s+", ""))));
             return resultConfig.result().getAddElementResultSuccessAdded().get(lang);
-        }
-        catch (DataIntegrityViolationException | ConstraintViolationException exception){
+        } catch (DataIntegrityViolationException | ConstraintViolationException exception) {
             return resultConfig.result().getAddElementResultNotAdded().get(lang);
         }
     }
+
     @Autowired
     BookRepository bookRepository;
-    public String  removeEdition(String edition, String lang) {
-        for (Book b :bookRepository.findAll()){
-            if (b.getEdition()== editionRepository.getIdEditionByValue(Integer.parseInt(edition))){
+
+    public String removeEdition(String edition, String lang) {
+        for (Book b : bookRepository.findAll()) {
+            if (b.getEdition() == editionRepository.getIdEditionByValue(Integer.parseInt(edition))) {
                 return resultConfig.result().getHasReferences().get(lang);
             }
         }
-        if (editionRepository.findById(editionRepository.getIdEditionByValue(Integer.parseInt(edition))).isPresent()){
+        if (editionRepository.findById(editionRepository.getIdEditionByValue(Integer.parseInt(edition))).isPresent()) {
 
             editionRepository.deleteById(editionRepository.getIdEditionByValue(Integer.parseInt(edition)));
             return resultConfig.result().getRemoveElementResultSuccessRemoved().get(lang);
@@ -56,7 +57,7 @@ public class EditionService {
     }
 
     public String updateEdition(String oldEdition, String newEdition, String lang) {
-        if (editionRepository.findById(editionRepository.getIdEditionByValue(Integer.parseInt(oldEdition))).isPresent()){
+        if (editionRepository.findById(editionRepository.getIdEditionByValue(Integer.parseInt(oldEdition))).isPresent()) {
             Edition edition = editionRepository.findById(editionRepository.getIdEditionByValue(Integer.parseInt(oldEdition))).get();
             edition.setValue(Integer.parseInt(newEdition));
             editionRepository.save(edition);
@@ -65,5 +66,3 @@ public class EditionService {
         return resultConfig.result().getModifyElementResultNotModified().get(lang);
     }
 }
-
-

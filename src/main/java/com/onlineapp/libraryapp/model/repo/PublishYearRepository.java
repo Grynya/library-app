@@ -12,12 +12,12 @@ import java.util.List;
 public interface PublishYearRepository extends CrudRepository<PublishYear, Integer> {
 
 
-    @Query(value="SELECT * from publish_years WHERE publish_years.year=:year",nativeQuery=true)
+    @Query(value = "SELECT * from publish_years WHERE publish_years.year=:year", nativeQuery = true)
     List<String> checkForDuplicate(@Param("year") int year);
 
-    default int getIdPublishByYear(Integer year){
-        for (PublishYear publishYear: this.findAll()){
-            if(publishYear.getYear()==year){
+    default int getIdPublishByYear(Integer year) {
+        for (PublishYear publishYear : this.findAll()) {
+            if (publishYear.getYear() == year) {
                 return publishYear.getId();
             }
         }

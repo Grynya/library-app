@@ -9,14 +9,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CoverRepository extends CrudRepository<Cover, Integer>{
+public interface CoverRepository extends CrudRepository<Cover, Integer> {
 
-    @Query(value="SELECT * from covers WHERE covers.name=:name",nativeQuery=true)
+    @Query(value = "SELECT * from covers WHERE covers.name=:name", nativeQuery = true)
     List<String> checkForDuplicate(@Param("name") String name);
 
-    default int getIdCoverByName(String name){
-        for (Cover cover: this.findAll()){
-            if(cover.getName().equals(name)){
+    default int getIdCoverByName(String name) {
+        for (Cover cover : this.findAll()) {
+            if (cover.getName().equals(name)) {
                 return cover.getId();
             }
         }

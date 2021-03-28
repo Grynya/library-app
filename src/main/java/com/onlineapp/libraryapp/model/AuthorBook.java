@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class AuthorBook {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     public AuthorBook(Integer idAuthor, Integer idBook) {
@@ -28,6 +28,7 @@ public class AuthorBook {
     public Integer getId() {
         return id;
     }
+
     private Integer idAuthor;
     private Integer idBook;
 

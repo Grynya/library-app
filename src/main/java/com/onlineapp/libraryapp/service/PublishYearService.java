@@ -28,25 +28,25 @@ public class PublishYearService {
         return publishYearRepository.findAll();
     }
 
-    public String addPublishYear(String year, String lang){
+    public String addPublishYear(String year, String lang) {
         try {
-            publishYearRepository.save(new PublishYear(Integer.parseInt(year.replaceAll("\\s+",""))));
+            publishYearRepository.save(new PublishYear(Integer.parseInt(year.replaceAll("\\s+", ""))));
             return resultConfig.result().getAddElementResultSuccessAdded().get(lang);
-        }
-        catch (DataIntegrityViolationException | ConstraintViolationException exception){
+        } catch (DataIntegrityViolationException | ConstraintViolationException exception) {
             return resultConfig.result().getAddElementResultNotAdded().get(lang);
         }
     }
+
     @Autowired
     BookRepository bookRepository;
 
-    public String  removePublishYear(String year, String lang) {
-        for (Book b :bookRepository.findAll()){
-            if (b.getPublishYear()== publishYearRepository.getIdPublishByYear(Integer.parseInt(year))){
+    public String removePublishYear(String year, String lang) {
+        for (Book b : bookRepository.findAll()) {
+            if (b.getPublishYear() == publishYearRepository.getIdPublishByYear(Integer.parseInt(year))) {
                 return resultConfig.result().getHasReferences().get(lang);
             }
         }
-        if (publishYearRepository.findById(publishYearRepository.getIdPublishByYear(Integer.parseInt(year))).isPresent()){
+        if (publishYearRepository.findById(publishYearRepository.getIdPublishByYear(Integer.parseInt(year))).isPresent()) {
             publishYearRepository.deleteById(publishYearRepository.getIdPublishByYear(Integer.parseInt(year)));
             return resultConfig.result().getRemoveElementResultSuccessRemoved().get(lang);
         }
@@ -55,7 +55,7 @@ public class PublishYearService {
 
     public String updatePublishYear(String oldPublishYear, String newPublishYear, String lang) {
         if (publishYearRepository.
-                findById(publishYearRepository.getIdPublishByYear(Integer.parseInt(oldPublishYear))).isPresent()){
+                findById(publishYearRepository.getIdPublishByYear(Integer.parseInt(oldPublishYear))).isPresent()) {
 
             PublishYear publishYear = publishYearRepository.
                     findById(publishYearRepository.getIdPublishByYear(Integer.parseInt(oldPublishYear))).get();
@@ -67,4 +67,3 @@ public class PublishYearService {
         return resultConfig.result().getModifyElementResultNotModified().get(lang);
     }
 }
-

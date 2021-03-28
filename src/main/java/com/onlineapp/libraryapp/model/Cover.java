@@ -10,8 +10,8 @@ public class Cover {
 
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-     Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Integer id;
 
     private String name;
 

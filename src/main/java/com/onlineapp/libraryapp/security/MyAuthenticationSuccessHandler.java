@@ -48,12 +48,11 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
 
         List<String> authoritiesList = new ArrayList<>();
 
-        authorities.forEach(auth->authoritiesList.add(auth.getAuthority()));
+        authorities.forEach(auth -> authoritiesList.add(auth.getAuthority()));
 
-        if (authoritiesList.contains("developers:read") && authoritiesList.contains("developers:write") && authoritiesList.contains("developers:update")&& authoritiesList.contains("developers:delete")){
+        if (authoritiesList.contains("developers:read") && authoritiesList.contains("developers:write") && authoritiesList.contains("developers:update") && authoritiesList.contains("developers:delete")) {
             return "/addElements";
-        }
-        else if (authoritiesList.contains("developers:read")){
+        } else if (authoritiesList.contains("developers:read")) {
             return "/listsOfElements";
         }
 

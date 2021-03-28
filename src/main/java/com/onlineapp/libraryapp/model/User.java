@@ -1,6 +1,5 @@
 package com.onlineapp.libraryapp.model;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -44,7 +43,7 @@ public class User {
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
-        this.active=active;
+        this.active = active;
     }
 
     public User() {

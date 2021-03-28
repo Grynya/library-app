@@ -1,6 +1,5 @@
 package com.onlineapp.libraryapp.service;
 
-import com.onlineapp.libraryapp.model.AuthorBook;
 import com.onlineapp.libraryapp.model.repo.AuthorBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

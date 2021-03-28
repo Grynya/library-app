@@ -20,34 +20,37 @@ public class PublishYearController {
     }
 
     @GetMapping("/addElements/publishYears")
-    public String publishYears(Model model) {
+    public String publishYearsInAddElements(Model model) {
         model.addAttribute("publishYears", publishYearService.publishYears());
         return "addElements";
     }
+
     @GetMapping("/modifyRemoveElements/publishYears")
-    public String publishYears2(Model model) {
+    public String publishYearsInModifyRemoveElements(Model model) {
         model.addAttribute("publishYears", publishYearService.publishYears());
         return "modifyRemoveElements";
     }
+
     @GetMapping("/listsOfElements/publishYears")
-    public String publishYears3(Model model) {
+    public String publishYearsInListsOfElements(Model model) {
         model.addAttribute("publishYears", publishYearService.publishYears());
         return "listsOfElements";
     }
+
     @PostMapping("/addElements/addPublishYear")
-    public String addPublishYears(Model model, @RequestParam String publishYear, @RequestParam String lang){
+    public String addPublishYears(Model model, @RequestParam String publishYear, @RequestParam String lang) {
         model.addAttribute("addYearResult", publishYearService.addPublishYear(publishYear, lang));
         return "addElements";
     }
 
     @PostMapping("/modifyRemoveElements/removePublishYear")
-    public String removePublishYear(Model model, @RequestParam String publishYear, @RequestParam String lang){
+    public String removePublishYear(Model model, @RequestParam String publishYear, @RequestParam String lang) {
         model.addAttribute("removeYearResult", publishYearService.removePublishYear(publishYear, lang));
         return "modifyRemoveElements";
     }
 
     @PostMapping("/modifyRemoveElements/updatePublishYear")
-    public String updatePublishYear(Model model, @RequestParam String oldPublishYear, @RequestParam String newPublishYear, @RequestParam String lang){
+    public String updatePublishYear(Model model, @RequestParam String oldPublishYear, @RequestParam String newPublishYear, @RequestParam String lang) {
         model.addAttribute("updatePublishYearResult", publishYearService.updatePublishYear(oldPublishYear, newPublishYear, lang));
         return "modifyRemoveElements";
     }

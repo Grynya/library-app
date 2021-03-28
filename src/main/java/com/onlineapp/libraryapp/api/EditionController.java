@@ -21,34 +21,37 @@ public class EditionController {
     }
 
     @GetMapping("/addElements/editions")
-    public String editions(Model model) {
+    public String editionsInAddElements(Model model) {
         model.addAttribute("editions", editionService.editions());
         return "addElements";
     }
+
     @GetMapping("/modifyRemoveElements/editions")
-    public String editions2(Model model) {
+    public String editionsInModifyRemoveElements(Model model) {
         model.addAttribute("editions", editionService.editions());
         return "modifyRemoveElements";
     }
+
     @GetMapping("/listsOfElements/editions")
-    public String editions3(Model model) {
+    public String editionsInListsOfElements(Model model) {
         model.addAttribute("editions", editionService.editions());
         return "listsOfElements";
     }
+
     @PostMapping("/addElements/addEdition")
-    public String addEdition(Model model, @RequestParam String edition, @RequestParam String lang){
+    public String addEdition(Model model, @RequestParam String edition, @RequestParam String lang) {
         model.addAttribute("addEditionResult", editionService.addEdition(edition, lang));
         return "addElements";
     }
 
     @PostMapping("/modifyRemoveElements/removeEdition")
-    public String removeEdition(Model model, @RequestParam String edition, @RequestParam String lang){
+    public String removeEdition(Model model, @RequestParam String edition, @RequestParam String lang) {
         model.addAttribute("removeEditionResult", editionService.removeEdition(edition, lang));
         return "modifyRemoveElements";
     }
 
     @PostMapping("/modifyRemoveElements/updateEdition")
-    public String updateEdition(Model model, @RequestParam String oldEdition, @RequestParam String newEdition, @RequestParam String lang){
+    public String updateEdition(Model model, @RequestParam String oldEdition, @RequestParam String newEdition, @RequestParam String lang) {
         model.addAttribute("updateEditionResult", editionService.updateEdition(oldEdition, newEdition, lang));
         return "modifyRemoveElements";
     }

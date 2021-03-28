@@ -1,6 +1,5 @@
 package com.onlineapp.libraryapp.config;
 
-import com.onlineapp.libraryapp.model.Permission;
 import com.onlineapp.libraryapp.security.MyAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,25 +28,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                    .csrf().disable()
-                    .authorizeRequests()
-                    .antMatchers("/signup", "/addUser").permitAll()
-                    .anyRequest()
-                    .authenticated()
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/signup", "/addUser").permitAll()
+                .anyRequest()
+                .authenticated()
                 .and()
-                    .formLogin()
-                    .loginPage("/login")
-                    .permitAll()
-                    .successHandler(myAuthenticationSuccessHandler())
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .successHandler(myAuthenticationSuccessHandler())
                 .and()
-                    .logout()
-                    .permitAll()
+                .logout()
+                .permitAll()
                 .and()
-                    .httpBasic();
+                .httpBasic();
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth){
+    protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(authenticationProvider());
     }
 
@@ -65,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public MyAuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+    public MyAuthenticationSuccessHandler myAuthenticationSuccessHandler() {
         return new MyAuthenticationSuccessHandler();
     }
 

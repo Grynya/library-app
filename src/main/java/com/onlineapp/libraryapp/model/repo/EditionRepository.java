@@ -12,20 +12,16 @@ import java.util.List;
 public interface EditionRepository extends CrudRepository<Edition, Integer> {
 
 
-    @Query(value="SELECT * from editions WHERE editions.value=:value",nativeQuery=true)
+    @Query(value = "SELECT * from editions WHERE editions.value=:value", nativeQuery = true)
     List<String> checkForDuplicate(@Param("value") int value);
 
-    default Integer getIdEditionByValue(Integer value){
-        for (Edition edition: this.findAll()){
-            if(edition.getValue()==value){
+    default Integer getIdEditionByValue(Integer value) {
+        for (Edition edition : this.findAll()) {
+            if (edition.getValue() == value) {
                 return edition.getId();
             }
         }
         return -1;
     }
 
-
-
-
-    }
-
+}

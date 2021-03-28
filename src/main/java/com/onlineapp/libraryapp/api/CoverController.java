@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -20,34 +19,37 @@ public class CoverController {
     }
 
     @GetMapping("/addElements/covers")
-    public String covers(Model model) {
+    public String coversInAddElements(Model model) {
         model.addAttribute("covers", coverService.covers());
         return "addElements";
     }
+
     @GetMapping("/modifyRemoveElements/covers")
-    public String covers2(Model model) {
+    public String coversInModifyRemoveElements(Model model) {
         model.addAttribute("covers", coverService.covers());
         return "modifyRemoveElements";
     }
+
     @GetMapping("/listsOfElements/covers")
-    public String covers3(Model model) {
+    public String coversInListsOfElements(Model model) {
         model.addAttribute("covers", coverService.covers());
         return "listsOfElements";
     }
+
     @PostMapping("/addElements/addCover")
-    public String addCover(Model model, @RequestParam String cover, @RequestParam String lang){
-        model.addAttribute("addCoverResult",coverService.addCover(cover, lang));
+    public String addCover(Model model, @RequestParam String cover, @RequestParam String lang) {
+        model.addAttribute("addCoverResult", coverService.addCover(cover, lang));
         return "addElements";
     }
 
     @PostMapping("/modifyRemoveElements/removeCover")
-    public String removeCover(Model model, @RequestParam String cover, @RequestParam String lang){
-        model.addAttribute("removeCoverResult",coverService.removeCover(cover, lang));
+    public String removeCover(Model model, @RequestParam String cover, @RequestParam String lang) {
+        model.addAttribute("removeCoverResult", coverService.removeCover(cover, lang));
         return "modifyRemoveElements";
     }
 
     @PostMapping("/modifyRemoveElements/updateCover")
-    public String updateCover(Model model, @RequestParam String oldCover, @RequestParam String newCover, @RequestParam String lang){
+    public String updateCover(Model model, @RequestParam String oldCover, @RequestParam String newCover, @RequestParam String lang) {
         model.addAttribute("updateCoverResult", coverService.updateCover(oldCover, newCover, lang));
         return "modifyRemoveElements";
     }
