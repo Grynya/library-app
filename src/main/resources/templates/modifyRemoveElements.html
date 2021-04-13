@@ -1,0 +1,245 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#delete">Delete</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#modify">Modify</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/addElements">Add elements</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout" >Log out</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id="delete" align="center">
+    <h1>Delete Elements</h1>
+    <h1>Authors</h1>
+    <div class="center-block">
+        <form action="/modifyRemoveElements/removeAuthor" method="post" class="col-md-4">
+            <label for="FormInput1" class="form-label">Name</label>
+            <input type="text" class="form-control" id="FormInput1" placeholder="Name" name="firstName">
+            <label for="FormInput2" class="form-label">Surname</label>
+            <input type="text" class="form-control" id="FormInput2" placeholder="Surname" name="lastName">
+            <label for="FormInput3" class="form-label">Patronymic</label>
+            <input type="text" class="form-control" id="FormInput3" placeholder="Patronymic" name="patronymic">
+            <label><input type="radio" name="lang" value="eng" required>eng</label>
+            <label><input type="radio" name="lang" value="rus">rus</label>
+            <label><input type="radio" name="lang" value="ukr">ukr</label>
+            <br><input type="submit" value="Delete">
+            <br><b th:text="${removeAuthorResult}"></b>
+        </form>
+    </div>
+    <h2>Книги</h2>
+    <div class="center-block">
+        <form action="/modifyRemoveElements/removeBook" method="post" class="col-md-4">
+            <label for="FormInput19" class="form-label">Name</label>
+            <input type="text" class="form-control" id="FormInput21" placeholder="Name" name="name">
+            <label for="FormInput22" class="form-label">ISBN</label>
+            <input type="text" class="form-control" id="FormInput22" placeholder="isbn" name="isbn">
+            <label><input type="radio" name="lang" value="eng" required>eng</label>
+            <label><input type="radio" name="lang" value="rus">rus</label>
+            <label><input type="radio" name="lang" value="ukr">ukr</label>
+            <br><b th:text="${removeBookResult}"></b>
+            <br><input type="submit" value="Delete">
+
+        </form>
+    </div>
+    <h2>Covers</h2>
+    <div class="center-block">
+        <form action="/modifyRemoveElements/removeCover" method="post" class="col-md-4">
+            <label for="FormInput" class="form-label">Cover's name</label>
+            <input type="text" class="form-control" id="FormInput" placeholder="Cover's name" name="cover">
+            <label><input type="radio" name="lang" value="eng" required>eng</label>
+            <label><input type="radio" name="lang" value="rus">rus</label>
+            <label><input type="radio" name="lang" value="ukr">ukr</label>
+            <br><input type="submit" value="Delete">
+            <br><b th:text="${removeCoverResult}"></b>
+        </form>
+    </div>
+    <h2>Editions</h2>
+    <div class="center-block">
+        <form action="/modifyRemoveElements/removeEdition" method="post" class="col-md-4">
+            <label for="FormInput0" class="form-label">Number of editions</label>
+            <input type="number" class="form-control" id="FormInput0" placeholder="Number of editions" name="edition">
+            <label><input type="radio" name="lang" value="eng" required>eng</label>
+            <label><input type="radio" name="lang" value="rus">rus</label>
+            <label><input type="radio" name="lang" value="ukr">ukr</label>
+            <br><input type="submit" value="Delete">
+            <br><b th:text="${removeEditionResult}"></b>
+
+        </form>
+    </div>
+    <h2>Publish years</h2>
+    <div class="center-block">
+        <form action="/modifyRemoveElements/removePublishYear" method="post" class="col-md-4">
+            <label for="FormInput23" class="form-label">Year</label>
+            <input type="text" class="form-control" id="FormInput23" placeholder="Year" name="publishYear">
+            <label><input type="radio" name="lang" value="eng" required>eng</label>
+            <label><input type="radio" name="lang" value="rus">rus</label>
+            <label><input type="radio" name="lang" value="ukr">ukr</label>
+            <br><input type="submit" value="Delete">
+            <br><b th:text="${removeYearResult}"></b>
+        </form>
+    </div>
+</div>
+
+<div id="modify" align="center">
+<h1>Modify elements</h1>
+    <h2>Authors</h2>
+    <div id="authors" class="d-flex flex-row">
+        <div class="col-md-4">
+            <button><a href="/modifyRemoveElements/authors">List of all</a> </button>
+            <div th:each="el: ${authors}">
+                <span th:text="${el.firstName}"></span>
+                <span th:text="${el.lastName}"></span>
+                <span th:text="${el.patronymic}"></span>
+            </div>
+        </div>
+        <form action="/modifyRemoveElements/updateAuthor" method="post" class="col-md-4">
+                <label for="FormInput15" class="form-label">Old Name</label>
+                <input type="text" class="form-control" id="FormInput15" placeholder="Name" name="oldFirstName">
+                <label for="FormInput16" class="form-label">Old Surname</label>
+                <input type="text" class="form-control" id="FormInput16" placeholder="Surname" name="oldLastName">
+                <label for="FormInput17" class="form-label">Old Patronymic</label>
+                <input type="text" class="form-control" id="FormInput17" placeholder="Patronymic" name="oldPatronymic">
+
+                <label for="FormInput18" class="form-label">New Name</label>
+                <input type="text" class="form-control" id="FormInput18" placeholder="Name" name="newFirstName">
+                <label for="FormInput19" class="form-label">New Surname</label>
+                <input type="text" class="form-control" id="FormInput19" placeholder="Surname" name="newLastName">
+                <label for="FormInput20" class="form-label">New Patronymic</label>
+                <input type="text" class="form-control" id="FormInput20" placeholder="Patronymic" name="newPatronymic">
+            <label><input type="radio" name="lang" value="eng" required>eng</label>
+            <label><input type="radio" name="lang" value="rus">rus</label>
+            <label><input type="radio" name="lang" value="ukr">ukr</label>
+            <input type="submit" value="Update">
+                <br><b th:text="${updateAuthorResult}"></b>
+        </form>
+    </div>
+    <h2>Books</h2>
+    <div id="books" class="d-flex flex-row">
+        <div class="col-md-4">
+            <button><a href="/modifyRemoveElements/books">List of all</a> </button>
+            <div th:each="bookMap:${books}">
+                <div th:each="book:${bookMap.entrySet()}">
+                    <span th:text="${book.getKey()}"></span>
+                    <span th:text="${book.getValue()}"></span>
+                </div>
+            </div>
+        </div>
+        <form action="/modifyRemoveElements/updateBook" method="post" class="col-md-4" >
+            <label for="FormInput24" class="form-label">Old Name</label>
+            <input type="text" class="form-control" id="FormInput24" placeholder="oldName" name="oldName">
+            <label for="FormInput25" class="form-label">Old ISBN</label>
+            <input type="text" class="form-control" id="FormInput25" placeholder="oldIsbn" name="oldIsbn">
+
+            <label for="FormInput4" class="form-label">New Author's name</label>
+            <input type="text" class="form-control" id="FormInput4" placeholder="New Author's name" name="newFirstName">
+            <label for="FormInput5" class="form-label">New Author's surname</label>
+            <input type="text" class="form-control" id="FormInput5" placeholder="New Author's surname" name="newLastName">
+            <label for="FormInput6" class="form-label">New Author's patronymic</label>
+            <input type="text" class="form-control" id="FormInput6" placeholder="New Author's patronymic" name="newPatronymic">
+            <label for="FormInput7" class="form-label">New Name</label>
+            <input type="text" class="form-control" id="FormInput7" placeholder="newName" name="newName">
+            <label for="FormInput8" class="form-label">New Publish year</label>
+            <input type="number" class="form-control" id="FormInput8" placeholder="newPublishYear" name="newPublishYear">
+            <label for="FormInput9" class="form-label">New Number of editions</label>
+            <input type="number" class="form-control" id="FormInput9" placeholder="newEdition" name="newEdition">
+            <label for="FormInput10" class="form-label">New Cover</label>
+            <input type="text" class="form-control" id="FormInput10" placeholder="newCover" name="newCover">
+            <label for="FormInput11" class="form-label">New ISBN</label>
+            <input type="text" class="form-control" id="FormInput11" placeholder="newIsbn" name="newIsbn">
+            <input type="submit" value="Update">
+            <br><b th:text="${updateBookResult}"></b>
+            <label><input type="radio" name="lang" value="eng" required>eng</label>
+            <label><input type="radio" name="lang" value="rus">rus</label>
+            <label><input type="radio" name="lang" value="ukr">ukr</label>
+        </form>
+    </div>
+    <h2>Covers</h2>
+    <div id="covers" class="d-flex flex-row">
+        <div class="col-md-4">
+            <button><a href="/modifyRemoveElements/covers">List of all</a> </button>
+            <div th:each="el: ${covers}">
+                <span th:text="${el.getName()}"></span>
+            </div>
+        </div>
+        <form action="/modifyRemoveElements/updateCover" method="post" class="col-md-4" >
+            <label class="form-label">Old Cover's name</label>
+            <input type="text" class="form-control" placeholder="Old Cover's name" name="oldCover">
+            <label class="form-label">New Cover's name</label>
+            <input type="text" class="form-control" placeholder="New Cover's name" name="newCover">
+            <label><input type="radio" name="lang" value="eng" required>eng</label>
+            <label><input type="radio" name="lang" value="rus">rus</label>
+            <label><input type="radio" name="lang" value="ukr">ukr</label>
+            <br><input type="submit" value="Update">
+            <br><b th:text="${updateCoverResult}"></b>
+
+        </form>
+    </div>
+    <h2>Editions</h2>
+    <div id="editions" class="d-flex flex-row">
+        <div class="col-md-4">
+            <button><a href="/modifyRemoveElements/editions">List of all</a> </button>
+            <div th:each="el: ${editions}">
+                <span th:text="${el.getValue()}"></span>
+            </div>
+        </div>
+        <form action="/modifyRemoveElements/updateEdition" method="post" class="col-md-4">
+            <label class="form-label">Old Number of editions</label>
+            <input type="number" class="form-control" placeholder="Number of editions" name="oldEdition">
+            <label class="form-label">New Number of editions</label>
+            <input type="number" class="form-control" placeholder="Number of editions" name="newEdition">
+            <label><input type="radio" name="lang" value="eng" required>eng</label>
+            <label><input type="radio" name="lang" value="rus">rus</label>
+            <label><input type="radio" name="lang" value="ukr">ukr</label>
+            <br><input type="submit" value="Update">
+            <br><b th:text="${updateEditionResult}"></b>
+
+        </form>
+    </div>
+    <h2>Publish years</h2>
+    <div id="publishYears" class="d-flex flex-row">
+        <div class="col-md-4">
+            <button><a href="/modifyRemoveElements/publishYears">List of all</a> </button>
+            <div th:each="el: ${publishYears}">
+                <span th:text="${el.getYear()}"></span>
+            </div>
+        </div>
+        <form action="/modifyRemoveElements/updatePublishYear" method="post" class="col-md-4">
+            <label class="form-label">Old Year</label>
+            <input type="text" class="form-control" placeholder="Year" name="oldPublishYear">
+            <label class="form-label">New Year</label>
+            <input type="text" class="form-control" placeholder="Year" name="newPublishYear">
+            <label><input type="radio" name="lang" value="eng" required>eng</label>
+            <label><input type="radio" name="lang" value="rus">rus</label>
+            <label><input type="radio" name="lang" value="ukr">ukr</label>
+            <br><input type="submit" value="Update">
+            <br><b th:text="${updatePublishYearResult}"></b>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>

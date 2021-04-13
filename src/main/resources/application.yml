@@ -1,0 +1,52 @@
+server:
+  tomcat:
+    antiResourceLocking: false
+    resource:
+      allow-caching: false
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/libraryapp
+    username: postgres
+    password: 12345
+    driverClassName: org.postgresql.Driver
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+  cloud:
+    config:
+      uri: http://localhost:8888
+
+add_element_result_success_added:
+  eng: Added
+  rus: Добавлено
+  ukr: Додано
+
+add_element_result_not_added:
+  eng: Object has already exist
+  rus: Объект уже существует
+  ukr: Об'єкт вже існує
+
+remove_element_result_success_removed:
+  eng: Deleted
+  rus: Удалено
+  ukr: Видалено
+remove_element_result_not_removed:
+  eng: Object does not exist
+  rus: Объект не существует
+  ukr: Об'єкт не існує
+
+modify_element_result_success_modified:
+  eng: Updated
+  rus: Изменено
+  ukr: Оновлено
+
+modify_element_result_not_modified:
+  eng: Object does not exist
+  rus: Объект не существует
+  ukr: Об'єкт не існує
+
+has_references:
+  eng: Object refers to other objects
+  rus: Объект ссылается на другие объекты
+  ukr: Об'єкт посилається на інші об'єкти
