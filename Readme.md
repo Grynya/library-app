@@ -1,5 +1,5 @@
 # Library Application of library.
-** Online library application ** using Spring Boot, MVC pattern and PostgreSQL, allows to manage its elements.
+Online library application using Spring Boot, MVC pattern and PostgreSQL, allows to manage its elements.
 ### Main elements include:
     - Authors
     - Books
