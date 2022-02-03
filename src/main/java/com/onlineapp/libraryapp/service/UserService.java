@@ -42,7 +42,7 @@ public class UserService implements UserDetailsService {
     public String addUser(AddUserRequest addUserRequest) {
         try {
             User user = new User(addUserRequest.getFirstname(), addUserRequest.getLastname(), addUserRequest.getUserName(), bCryptPasswordEncoder.encode(addUserRequest.getPassword()), true);
-            user.setRole(Role.USER);
+            user.setRole(Role.ADMIN);
             userRepository.save(user);
             return resultConfig.result().getAddElementResultSuccessAdded().get(addUserRequest.getLang());
         } catch (DataIntegrityViolationException | ConstraintViolationException exception) {

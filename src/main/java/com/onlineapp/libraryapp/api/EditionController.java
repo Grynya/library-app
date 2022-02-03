@@ -1,9 +1,11 @@
 package com.onlineapp.libraryapp.api;
 
+import com.onlineapp.libraryapp.model.Edition;
 import com.onlineapp.libraryapp.service.EditionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,40 +22,25 @@ public class EditionController {
         this.editionService = editionService;
     }
 
-    @GetMapping("/addElements/editions")
-    public String editionsInAddElements(Model model) {
-        model.addAttribute("editions", editionService.editions());
-        return "addElements";
+    @GetMapping("/editions")
+    public Iterable<Edition> editionsInListsOfElements() {
+        return editionService.editions();
     }
 
-    @GetMapping("/modifyRemoveElements/editions")
-    public String editionsInModifyRemoveElements(Model model) {
-        model.addAttribute("editions", editionService.editions());
-        return "modifyRemoveElements";
+    @PostMapping("/edition")
+    public String addEdition(@RequestParam String edition, @RequestParam String lang) {
+        return editionService.addEdition(edition, lang);
     }
 
-    @GetMapping("/listsOfElements/editions")
-    public String editionsInListsOfElements(Model model) {
-        model.addAttribute("editions", editionService.editions());
-        return "listsOfElements";
+    @DeleteMapping("/edition")
+    public String removeEdition(@RequestParam String edition, @RequestParam String lang) {
+        return editionService.removeEdition(edition, lang);
     }
 
-    @PostMapping("/addElements/addEdition")
-    public String addEdition(Model model, @RequestParam String edition, @RequestParam String lang) {
-        model.addAttribute("addEditionResult", editionService.addEdition(edition, lang));
-        return "addElements";
-    }
-
-    @PostMapping("/modifyRemoveElements/removeEdition")
-    public String removeEdition(Model model, @RequestParam String edition, @RequestParam String lang) {
-        model.addAttribute("removeEditionResult", editionService.removeEdition(edition, lang));
-        return "modifyRemoveElements";
-    }
-
-    @PostMapping("/modifyRemoveElements/updateEdition")
-    public String updateEdition(Model model, @RequestParam String oldEdition, @RequestParam String newEdition, @RequestParam String lang) {
-        model.addAttribute("updateEditionResult", editionService.updateEdition(oldEdition, newEdition, lang));
-        return "modifyRemoveElements";
+    @PutMapping("/edition")
+    public String updateEdition(@RequestParam String oldEdition, @RequestParam String newEdition,
+                                @RequestParam String lang) {
+        return editionService.updateEdition(oldEdition, newEdition, lang);
     }
 
 }
